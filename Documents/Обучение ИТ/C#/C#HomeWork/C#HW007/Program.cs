@@ -65,7 +65,7 @@ int[,] RandomArray2d()
 
     for(int i = 0; i < rows; i++)
     {
-        for(int j = 0; j < columns;j++)
+        for(int j = 0; j < columns; j++)
         {
             newArray[i, j] = new Random().Next(minValue, maxValue + 1);
         }
@@ -85,7 +85,7 @@ void Show2Darray(int[,] array)
     }
     Console.WriteLine();
 }
-
+/*
 void FindValueXY(int[,] array)
 {
     Console.Write("Input a point X: ");
@@ -101,3 +101,35 @@ void FindValueXY(int[,] array)
 int[,] newArray = RandomArray2d();
 Show2Darray(newArray);
 FindValueXY(newArray);
+*/
+
+// Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+
+double[] AverageColumns(int[,] array)
+{
+    double[] Array1D = new double[array.GetLength(1)];
+    for(int j = 0; j < array.GetLength(1); j++)
+    {
+        for(int i = 0; i < array.GetLength(0); i++)
+        {
+            Array1D[j] = (Array1D[j] + (array[i, j]));
+        }
+        Array1D[j] /= array.GetLength(0);
+    }
+    return Array1D;
+}
+
+void ShowArray(double[] array)
+{
+    Console.Write($"Array: ");
+    for(int i = 0; i < array.Length; i++)
+    {
+        if(i == array.Length - 1) Console.Write(Math.Round((array[i]), 2));
+        else Console.Write(Math.Round(array[i], 2) + "|");
+    }
+    Console.WriteLine();
+}
+
+int[,] newArray = RandomArray2d();
+Show2Darray(newArray);
+ShowArray(AverageColumns(newArray));
